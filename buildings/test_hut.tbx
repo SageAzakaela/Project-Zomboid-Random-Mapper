@@ -1,0 +1,327 @@
+<building version="3" width="8" height="7" ExteriorWall="3" ExteriorWallTrim="0" Door="2" DoorFrame="1" Window="13" Curtains="0" Shutters="11" Stairs="12" RoofCap="8" RoofSlope="9" RoofTop="10" GrimeWall="4">
+ <tile_entry category="door_frames">
+  <tile enum="West" tile="fixtures_doors_frames_01_000" />
+  <tile enum="North" tile="fixtures_doors_frames_01_001" />
+ </tile_entry>
+ <tile_entry category="doors">
+  <tile enum="West" tile="aza_tron_door_black_040" />
+  <tile enum="North" tile="aza_tron_door_black_041" />
+  <tile enum="WestOpen" tile="aza_tron_door_black_042" />
+  <tile enum="NorthOpen" tile="aza_tron_door_black_043" />
+ </tile_entry>
+ <tile_entry category="exterior_walls">
+  <tile enum="West" tile="AZA_Castle_Wall_1_000" />
+  <tile enum="North" tile="AZA_Castle_Wall_1_001" />
+  <tile enum="NorthWest" tile="AZA_Castle_Wall_1_002" />
+  <tile enum="SouthEast" tile="AZA_Castle_Wall_1_003" />
+  <tile enum="WestWindow" tile="AZA_Castle_Wall_1_008" />
+  <tile enum="NorthWindow" tile="AZA_Castle_Wall_1_009" />
+  <tile enum="WestDoor" tile="AZA_Castle_Wall_1_010" />
+  <tile enum="NorthDoor" tile="AZA_Castle_Wall_1_011" />
+ </tile_entry>
+ <tile_entry category="grime_wall">
+  <tile enum="West" tile="overlay_grime_wall_01_000" />
+  <tile enum="North" tile="overlay_grime_wall_01_001" />
+  <tile enum="NorthWest" tile="overlay_grime_wall_01_002" />
+  <tile enum="SouthEast" tile="overlay_grime_wall_01_003" />
+  <tile enum="WestWindow" tile="overlay_grime_wall_01_008" />
+  <tile enum="NorthWindow" tile="overlay_grime_wall_01_009" />
+  <tile enum="WestDoor" tile="overlay_grime_wall_01_010" />
+  <tile enum="NorthDoor" tile="overlay_grime_wall_01_011" />
+  <tile enum="WestTrim" tile="overlay_grime_wall_01_032" />
+  <tile enum="NorthTrim" tile="overlay_grime_wall_01_033" />
+  <tile enum="NorthWestTrim" tile="overlay_grime_wall_01_034" />
+  <tile enum="SouthEastTrim" tile="overlay_grime_wall_01_035" />
+  <tile enum="WestDoubleLeft" tile="overlay_grime_wall_01_036" />
+  <tile enum="WestDoubleRight" tile="overlay_grime_wall_01_037" />
+  <tile enum="NorthDoubleLeft" tile="overlay_grime_wall_01_038" />
+  <tile enum="NorthDoubleRight" tile="overlay_grime_wall_01_039" />
+ </tile_entry>
+ <tile_entry category="interior_wall_trim">
+  <tile enum="West" tile="AZA_WoodWall_01_016" />
+  <tile enum="North" tile="AZA_WoodWall_01_017" />
+  <tile enum="NorthWest" tile="AZA_WoodWall_01_018" />
+  <tile enum="SouthEast" tile="AZA_WoodWall_01_019" />
+  <tile enum="WestWindow" tile="AZA_WoodWall_01_024" />
+  <tile enum="NorthWindow" tile="AZA_WoodWall_01_025" />
+  <tile enum="WestDoor" tile="AZA_WoodWall_01_026" />
+  <tile enum="NorthDoor" tile="AZA_WoodWall_01_027" />
+ </tile_entry>
+ <tile_entry category="interior_walls">
+  <tile enum="West" tile="AZA_Castle_Wall_1_000" />
+  <tile enum="North" tile="AZA_Castle_Wall_1_001" />
+  <tile enum="NorthWest" tile="AZA_Castle_Wall_1_002" />
+  <tile enum="SouthEast" tile="AZA_Castle_Wall_1_003" />
+  <tile enum="WestWindow" tile="AZA_Castle_Wall_1_008" />
+  <tile enum="NorthWindow" tile="AZA_Castle_Wall_1_009" />
+  <tile enum="WestDoor" tile="AZA_Castle_Wall_1_010" />
+  <tile enum="NorthDoor" tile="AZA_Castle_Wall_1_011" />
+ </tile_entry>
+ <tile_entry category="interior_walls">
+  <tile enum="West" tile="AZA_WoodWall_01_000" />
+  <tile enum="North" tile="AZA_WoodWall_01_001" />
+  <tile enum="NorthWest" tile="AZA_WoodWall_01_002" />
+  <tile enum="SouthEast" tile="AZA_WoodWall_01_003" />
+  <tile enum="WestWindow" tile="AZA_WoodWall_01_008" />
+  <tile enum="NorthWindow" tile="AZA_WoodWall_01_009" />
+  <tile enum="WestDoor" tile="AZA_WoodWall_01_010" />
+  <tile enum="NorthDoor" tile="AZA_WoodWall_01_011" />
+ </tile_entry>
+ <tile_entry category="roof_caps">
+  <tile enum="CapRiseE1" tile="AZA_ThatchedRoof_02_000" />
+  <tile enum="CapRiseE2" tile="AZA_ThatchedRoof_02_001" />
+  <tile enum="CapRiseE3" tile="AZA_ThatchedRoof_02_002" />
+  <tile enum="CapFallE1" tile="AZA_ThatchedRoof_02_008" />
+  <tile enum="CapFallE2" tile="AZA_ThatchedRoof_02_009" />
+  <tile enum="CapFallE3" tile="AZA_ThatchedRoof_02_010" />
+  <tile enum="CapRiseS1" tile="AZA_ThatchedRoof_02_013" />
+  <tile enum="CapRiseS2" tile="AZA_ThatchedRoof_02_012" />
+  <tile enum="CapRiseS3" tile="AZA_ThatchedRoof_02_011" />
+  <tile enum="CapFallS1" tile="AZA_ThatchedRoof_02_005" />
+  <tile enum="CapFallS2" tile="AZA_ThatchedRoof_02_004" />
+  <tile enum="CapFallS3" tile="AZA_ThatchedRoof_02_003" />
+  <tile enum="PeakPt5S" tile="AZA_ThatchedRoof_02_007" />
+  <tile enum="PeakPt5E" tile="AZA_ThatchedRoof_02_015" />
+  <tile enum="PeakOnePt5S" tile="AZA_ThatchedRoof_02_006" />
+  <tile enum="PeakOnePt5E" tile="AZA_ThatchedRoof_02_014" />
+  <tile enum="PeakTwoPt5S" tile="AZA_ThatchedRoof_02_017" />
+  <tile enum="PeakTwoPt5E" tile="AZA_ThatchedRoof_02_016" />
+  <tile enum="CapGapS1" tile="" />
+  <tile enum="CapGapS2" tile="" />
+  <tile enum="CapGapS3" tile="" />
+  <tile enum="CapGapE1" tile="" />
+  <tile enum="CapGapE2" tile="" />
+  <tile enum="CapGapE3" tile="" />
+  <tile enum="CapShallowRiseS1" tile="" />
+  <tile enum="CapShallowRiseS2" tile="" />
+  <tile enum="CapShallowFallS1" tile="" />
+  <tile enum="CapShallowFallS2" tile="" />
+  <tile enum="CapShallowRiseE1" tile="" />
+  <tile enum="CapShallowRiseE2" tile="" />
+  <tile enum="CapShallowFallE1" tile="" />
+  <tile enum="CapShallowFallE2" tile="" />
+ </tile_entry>
+ <tile_entry category="roof_slopes">
+  <tile enum="SlopeS1" tile="AZA_ThatchedRoof_01_000" />
+  <tile enum="SlopeS2" tile="AZA_ThatchedRoof_01_001" />
+  <tile enum="SlopeS3" tile="AZA_ThatchedRoof_01_002" />
+  <tile enum="SlopeE1" tile="AZA_ThatchedRoof_01_005" />
+  <tile enum="SlopeE2" tile="AZA_ThatchedRoof_01_004" />
+  <tile enum="SlopeE3" tile="AZA_ThatchedRoof_01_003" />
+  <tile enum="SlopePt5S" tile="AZA_ThatchedRoof_01_015" offset="1,1" />
+  <tile enum="SlopePt5E" tile="AZA_ThatchedRoof_01_014" offset="1,1" />
+  <tile enum="SlopeOnePt5S" tile="AZA_ThatchedRoof_01_015" />
+  <tile enum="SlopeOnePt5E" tile="AZA_ThatchedRoof_01_014" />
+  <tile enum="SlopeTwoPt5S" tile="AZA_ThatchedRoof_01_015" offset="-1,-1" />
+  <tile enum="SlopeTwoPt5E" tile="AZA_ThatchedRoof_01_014" offset="-1,-1" />
+  <tile enum="ShallowSlopeW1" tile="" />
+  <tile enum="ShallowSlopeW2" tile="" />
+  <tile enum="ShallowSlopeE1" tile="" />
+  <tile enum="ShallowSlopeE2" tile="" />
+  <tile enum="ShallowSlopeN1" tile="" />
+  <tile enum="ShallowSlopeN2" tile="" />
+  <tile enum="ShallowSlopeS1" tile="" />
+  <tile enum="ShallowSlopeS2" tile="" />
+  <tile enum="Inner1" tile="AZA_ThatchedRoof_01_011" />
+  <tile enum="Inner2" tile="AZA_ThatchedRoof_01_012" />
+  <tile enum="Inner3" tile="AZA_ThatchedRoof_01_013" />
+  <tile enum="Outer1" tile="AZA_ThatchedRoof_01_008" />
+  <tile enum="Outer2" tile="AZA_ThatchedRoof_01_009" />
+  <tile enum="Outer3" tile="AZA_ThatchedRoof_01_010" />
+  <tile enum="InnerPt5" tile="" />
+  <tile enum="InnerOnePt5" tile="" />
+  <tile enum="InnerTwoPt5" tile="" />
+  <tile enum="OuterPt5" tile="" />
+  <tile enum="OuterOnePt5" tile="" />
+  <tile enum="OuterTwoPt5" tile="" />
+  <tile enum="CornerSW1" tile="AZA_ThatchedRoof_01_024" />
+  <tile enum="CornerSW2" tile="AZA_ThatchedRoof_01_025" />
+  <tile enum="CornerSW3" tile="AZA_ThatchedRoof_01_026" />
+  <tile enum="CornerNE1" tile="AZA_ThatchedRoof_01_029" />
+  <tile enum="CornerNE2" tile="AZA_ThatchedRoof_01_028" />
+  <tile enum="CornerNE3" tile="AZA_ThatchedRoof_01_027" />
+ </tile_entry>
+ <tile_entry category="roof_tops">
+  <tile enum="West1" tile="aza_tron_floor_new_004" offset="-1,-1" />
+  <tile enum="West2" tile="aza_tron_floor_new_004" offset="-2,-2" />
+  <tile enum="West3" tile="aza_tron_floor_new_004" />
+  <tile enum="North1" tile="aza_tron_floor_new_004" offset="-1,-1" />
+  <tile enum="North2" tile="aza_tron_floor_new_004" offset="-2,-2" />
+  <tile enum="North3" tile="aza_tron_floor_new_004" />
+ </tile_entry>
+ <tile_entry category="shutters">
+  <tile enum="WestBelow" tile="fixtures_windows_detailing_01_016" />
+  <tile enum="WestAbove" tile="fixtures_windows_detailing_01_017" />
+  <tile enum="NorthLeft" tile="fixtures_windows_detailing_01_018" />
+  <tile enum="NorthRight" tile="fixtures_windows_detailing_01_019" />
+ </tile_entry>
+ <tile_entry category="stairs">
+  <tile enum="West1" tile="aza_junglestairs_000" />
+  <tile enum="West2" tile="aza_junglestairs_001" />
+  <tile enum="West3" tile="aza_junglestairs_002" />
+  <tile enum="North1" tile="aza_junglestairs_008" />
+  <tile enum="North2" tile="aza_junglestairs_009" />
+  <tile enum="North3" tile="aza_junglestairs_010" />
+ </tile_entry>
+ <tile_entry category="windows">
+  <tile enum="West" tile="fixtures_windows_01_000" />
+  <tile enum="North" tile="fixtures_windows_01_001" />
+ </tile_entry>
+ <user_tiles>
+  <tile tile="AZA_Castle_Wall_1_005" />
+  <tile tile="AZA_Castle_Wall_1_009" />
+  <tile tile="AZA_ThatchedRoof_01_000" />
+  <tile tile="AZA_ThatchedRoof_01_001" />
+  <tile tile="AZA_ThatchedRoof_01_002" />
+  <tile tile="AZA_ThatchedRoof_01_003" />
+  <tile tile="AZA_ThatchedRoof_01_004" />
+  <tile tile="AZA_ThatchedRoof_01_005" />
+  <tile tile="AZA_ThatchedRoof_01_006" />
+  <tile tile="AZA_ThatchedRoof_01_007" />
+  <tile tile="AZA_ThatchedRoof_01_021" />
+  <tile tile="AZA_ThatchedRoof_01_024" />
+  <tile tile="AZA_ThatchedRoof_01_041" />
+  <tile tile="AZA_ThatchedRoof_02_014" />
+  <tile tile="AZA_WoodWall_01_005" />
+  <tile tile="carpentry_01_026" />
+  <tile tile="carpentry_01_027" />
+  <tile tile="carpentry_01_044" />
+  <tile tile="carpentry_01_045" />
+  <tile tile="carpentry_01_049" />
+  <tile tile="carpentry_02_052" />
+  <tile tile="carpentry_02_064" />
+  <tile tile="carpentry_02_072" />
+  <tile tile="carpentry_02_073" />
+  <tile tile="carpentry_02_083" />
+  <tile tile="fixtures_fireplaces_01_003" />
+  <tile tile="fixtures_fireplaces_01_027" />
+  <tile tile="fixtures_fireplaces_01_028" />
+  <tile tile="fixtures_fireplaces_01_029" />
+  <tile tile="fixtures_windows_01_001" />
+  <tile tile="furniture_seating_indoor_03_042" />
+  <tile tile="furniture_shelving_01_002" />
+  <tile tile="invisible_01_000" />
+ </user_tiles>
+ <used_tiles>3 6 5 7 8 9 10</used_tiles>
+ <used_furniture />
+ <room Name="Room 1" InternalName="room1" Color="200 200 200" InteriorWall="6" InteriorWallTrim="5" Floor="0" GrimeFloor="0" GrimeWall="0" />
+ <floor>
+  <object type="wall" length="3" InteriorTile="7" ExteriorTrim="0" InteriorTrim="0" x="0" y="3" dir="W" Tile="0" />
+  <object type="wall" length="3" InteriorTile="7" ExteriorTrim="0" InteriorTrim="0" x="3" y="0" dir="N" Tile="0" />
+  <object type="wall" length="5" InteriorTile="7" ExteriorTrim="0" InteriorTrim="0" x="3" y="3" dir="W" Tile="0" />
+  <rooms>
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1
+</rooms>
+  <tiles layer="Doors">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,20,0,0,0,20,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,20,0,0,0,0,0
+</tiles>
+  <tiles layer="Furniture">
+0,25,25,23,24,25,25,0,25,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,25,25,22,0,25,25,25,
+26,0,0,0,0,0,0,18,0,
+0,0,0,0,25,0,0,17,0,
+0,0,0,0,0,0,19,16,21,
+25,30,0,25,25,30,0,0,25
+</tiles>
+  <tiles layer="Furniture2">
+32,0,0,0,0,0,0,0,0,
+32,0,0,0,0,0,0,0,0,
+32,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,31,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Roof">
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+0,0,0,0,0,0,0,0,10,
+9,9,9,9,9,9,9,9,11
+</tiles>
+  <tiles layer="WallTrim2">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+29,0,0,0,0,0,0,0,0,
+28,0,0,0,0,0,0,0,0,
+27,0,0,0,0,0,0,0,0,
+33,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Walls">
+0,2,0,0,0,2,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,15,0,0,0,15,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,2,0,1,0,2,0,0,0
+</tiles>
+ </floor>
+ <floor>
+  <object type="roof" width="3" height="3" RoofType="CornerOuterSW" Depth="Three" cappedW="false" cappedN="false" cappedE="false" cappedS="false" CapTiles="8" SlopeTiles="9" TopTiles="10" x="0" y="4" />
+  <object type="roof" width="3" height="3" RoofType="CornerOuterNW" Depth="Three" cappedW="false" cappedN="false" cappedE="false" cappedS="false" CapTiles="8" SlopeTiles="9" TopTiles="10" x="0" y="0" />
+  <object type="roof" width="3" height="3" RoofType="CornerOuterNE" Depth="Three" cappedW="false" cappedN="false" cappedE="false" cappedS="false" CapTiles="8" SlopeTiles="9" TopTiles="10" x="5" y="0" />
+  <object type="roof" width="3" height="3" RoofType="CornerOuterSE" Depth="TwoPoint5" cappedW="false" cappedN="false" cappedE="false" cappedS="false" CapTiles="8" SlopeTiles="9" TopTiles="10" x="5" y="4" />
+  <rooms>
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</rooms>
+  <tiles layer="Roof">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,6,7,8,0,
+0,0,0,5,5,5,0,0,0,
+0,0,0,4,4,0,0,0,0,
+0,0,0,3,3,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="Roof2">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,14,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</tiles>
+  <tiles layer="RoofCap2">
+0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,
+0,0,13,13,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</tiles>
+ </floor>
+</building>

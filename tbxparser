@@ -1,0 +1,25 @@
+import xml.etree.ElementTree as ET
+
+def parse_tbx_file(file_path):
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+
+        # Assuming the 'building' element is the root
+        width = root.get('width')
+        height = root.get('height')
+
+        if width is not None and height is not None:
+            print(f"Building Width: {width}")
+            print(f"Building Height: {height}")
+        else:
+            print("Error: Width or height not found in the tbx file.")
+
+    except ET.ParseError as e:
+        print(f"Error parsing XML file: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Replace 'your_file_path.tbx' with the actual file path
+tbx_file_path = 'test_hut.tbx'
+parse_tbx_file(tbx_file_path)
