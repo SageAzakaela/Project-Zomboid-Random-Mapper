@@ -6,7 +6,7 @@ from tkinter import ttk
 import random
 
 # Constants
-IMAGE_SIZE = (900, 3000)
+IMAGE_SIZE = (300, 300)
 SCALE = 50  # Adjust this to change the scale of the noise
 OCTAVES = 6  # Number of octaves for Perlin noise
 PERSISTENCE = 0.5  # Persistence parameter for Perlin noise
