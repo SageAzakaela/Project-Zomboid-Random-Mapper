@@ -35,7 +35,9 @@ class TerrainGeneratorApp(tk.Tk):
         self.dirt_road_density_var = tk.DoubleVar(value=DIRT_ROAD_DENSITY)
         self.primary_road_density_var = tk.DoubleVar(value=PRIMARY_ROAD_DENSITY)
         self.secondary_road_density_var = tk.DoubleVar(value=SECONDARY_ROAD_DENSITY)
-
+        self.driveway_density_var = tk.DoubleVar(value=0.2)
+        self.driveway_spacing_var = tk.DoubleVar(value=50)
+        self.driveway_length_var = tk.IntVar(value=12)
         self.create_widgets()
 
 
@@ -144,17 +146,45 @@ class TerrainGeneratorApp(tk.Tk):
         highway_spacing_slider = ttk.Scale(self, from_=10, to=100, orient="horizontal", variable=self.highway_spacing_var)
         highway_spacing_slider.grid(row=4, column=3, padx=5, pady=5)
 
-    # Method to display terrain image
-    def display_image(self, image):
-        photo = ImageTk.PhotoImage(image)
-        self.image_label.config(image=photo)
-        self.image_label.image = photo
+        # Driveway density slider
+        driveway_density_label = ttk.Label(self, text="Driveway Density:")
+        driveway_density_label.grid(row=11, column=2, padx=5, pady=5, sticky="e")
+        driveway_density_slider = ttk.Scale(self, from_=0, to=1, orient="horizontal", variable=self.driveway_density_var)
+        driveway_density_slider.grid(row=11, column=3, padx=5, pady=5)
 
-    # Method to display vegetation image
-    def display_image_vegetation(self, image):
+        # Driveway spacing slider
+        driveway_spacing_label = ttk.Label(self, text="Driveway Spacing:")
+        driveway_spacing_label.grid(row=12, column=2, padx=5, pady=5, sticky="e")
+        driveway_spacing_slider = ttk.Scale(self, from_=10, to=100, orient="horizontal", variable=self.driveway_spacing_var)
+        driveway_spacing_slider.grid(row=12, column=3, padx=5, pady=5)
+
+        # Driveway length slider
+        driveway_length_label = ttk.Label(self, text="Driveway Length:")
+        driveway_length_label.grid(row=13, column=2, padx=5, pady=5, sticky="e")
+        driveway_length_slider = ttk.Scale(self, from_=8, to=16, orient="horizontal", variable=self.driveway_length_var)
+        driveway_length_slider.grid(row=13, column=3, padx=5, pady=5)
+        
+    def display_image(self, image):
+        # Create a new window to display the image
+        image_window = tk.Toplevel(self.master)
+        image_window.title("Terrain Image")
+
+        # Display the image in a label
         photo = ImageTk.PhotoImage(image)
-        self.image_label_veg.config(image=photo)
-        self.image_label_veg.image = photo
+        label = tk.Label(image_window, image=photo)
+        label.image = photo
+        label.pack()
+
+    def display_image_vegetation(self, image):
+        # Create a new window to display the image
+        image_window = tk.Toplevel(self.master)
+        image_window.title("Vegetation Image")
+
+        # Display the image in a label
+        photo = ImageTk.PhotoImage(image)
+        label = tk.Label(image_window, image=photo)
+        label.image = photo
+        label.pack()
 
     # Modify the generate_terrain method in TerrainGeneratorApp class to apply road mask to the vegetation map
     def generate_terrain(self):
@@ -172,6 +202,11 @@ class TerrainGeneratorApp(tk.Tk):
         primary_road_density = self.primary_road_density_var.get()
         secondary_road_density = self.secondary_road_density_var.get()
 
+        # New driveway variables
+        driveway_density = self.driveway_density_var.get()
+        driveway_spacing = self.driveway_spacing_var.get()
+        driveway_length = self.driveway_length_var.get()
+
         # Get the seed value from the entry field
         seed_value = self.seed_entry.get()
 
@@ -187,7 +222,8 @@ class TerrainGeneratorApp(tk.Tk):
                                                                         water_threshold, dark_grass_threshold, medium_grass_threshold, seed=seed_value)
         # Generate roads with new parameters
         terrain_map_with_roads = generate_roads(terrain_map, road_density, highway_spacing,
-                                               road_width, dirt_road_density, primary_road_density, secondary_road_density)
+                                            road_width, dirt_road_density, primary_road_density, secondary_road_density,
+                                            driveway_density, driveway_spacing, driveway_length)
 
         # Apply road mask to vegetation map
         vegetation_map = apply_road_mask(terrain_map_with_roads, vegetation_map)
@@ -203,7 +239,7 @@ class TerrainGeneratorApp(tk.Tk):
         # Save the generated vegetation image
         output_veg_file_path = "output_veg.png"
         vegetation_map.save(output_veg_file_path)
-
+        
 def generate_perlin_noise(width, height, scale, octaves, persistence, lacunarity, seed):
     noise_map = np.zeros((width, height))
     for i in range(width):
@@ -316,7 +352,8 @@ def generate_terrain_and_vegetation(width, height, scale, octaves, persistence, 
     return terrain_map, vegetation_map
 
 def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
-                   dirt_road_density=0.2, primary_road_density=0.2, secondary_road_density=0.2):
+                   dirt_road_density=0.2, primary_road_density=0.2, secondary_road_density=0.2,
+                   driveway_density=0.2, driveway_spacing=50, driveway_length=12):
     draw = ImageDraw.Draw(terrain_map)
     width, height = terrain_map.size
 
@@ -345,6 +382,13 @@ def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
                 # Draw the road segment
                 draw.line([(start_x, start_y), (start_x, end_y)], fill=(120, 70, 20), width=road_width)
                 draw.line([(start_x, end_y), (end_x, end_y)], fill=(120, 70, 20), width=road_width)
+                
+                # Generate driveways
+                if random.random() < driveway_density:
+                    for k in range(start_y, end_y, int(driveway_spacing)):
+                        driveway_start_x = start_x - road_width // 2  # Adjust for the road width
+                        driveway_end_x = start_x + road_width // 2    # Adjust for the road width
+                        draw.line([(driveway_start_x, k), (driveway_end_x, k)], fill=(120, 70, 20), width=road_width)
 
     # Generate secondary roads branching off from primary roads
     for i in range(0, width, int(highway_spacing)):
@@ -366,6 +410,13 @@ def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
                 # Draw the road segment
                 draw.line([(start_x, start_y), (start_x, end_y)], fill=(165, 160, 140), width=road_width)
                 draw.line([(start_x, end_y), (end_x, end_y)], fill=(165, 160, 140), width=road_width)
+                
+                # Generate driveways
+                if random.random() < driveway_density:
+                    for k in range(start_x, end_x, int(driveway_spacing)):
+                        driveway_start_y = start_y - road_width // 2  # Adjust for the road width
+                        driveway_end_y = start_y + road_width // 2    # Adjust for the road width
+                        draw.line([(k, driveway_start_y), (k, driveway_end_y)], fill=(165, 160, 140), width=road_width)
 
     # Generate primary roads branching off from highways
     for i in range(0, width, int(highway_spacing)):

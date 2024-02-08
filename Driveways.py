@@ -6,15 +6,11 @@ from tkinter import ttk
 import random
 
 # Constants
-IMAGE_SIZE = (900, 900)
+IMAGE_SIZE = (300, 300)
 SCALE = 50  # Adjust this to change the scale of the noise
 OCTAVES = 6  # Number of octaves for Perlin noise
 PERSISTENCE = 0.5  # Persistence parameter for Perlin noise
 LACUNARITY = 2.0  # Lacunarity parameter for Perlin noise
-ROAD_WIDTH = 3
-DIRT_ROAD_DENSITY = 0.2
-PRIMARY_ROAD_DENSITY = 0.2
-SECONDARY_ROAD_DENSITY = 0.2
 
 class TerrainGeneratorApp(tk.Tk):
     def __init__(self):
@@ -31,10 +27,6 @@ class TerrainGeneratorApp(tk.Tk):
         self.medium_grass_threshold_var = tk.DoubleVar(value=0.6)
         self.road_density_var = tk.DoubleVar(value=0.2)
         self.highway_spacing_var = tk.DoubleVar(value=50)  # Define highway spacing variable
-        self.road_width_var = tk.IntVar(value=ROAD_WIDTH)
-        self.dirt_road_density_var = tk.DoubleVar(value=DIRT_ROAD_DENSITY)
-        self.primary_road_density_var = tk.DoubleVar(value=PRIMARY_ROAD_DENSITY)
-        self.secondary_road_density_var = tk.DoubleVar(value=SECONDARY_ROAD_DENSITY)
 
         self.create_widgets()
 
@@ -114,30 +106,6 @@ class TerrainGeneratorApp(tk.Tk):
         road_density_slider = ttk.Scale(self, from_=0, to=1, orient="horizontal", variable=self.road_density_var)
         road_density_slider.grid(row=1, column=3, padx=5, pady=5)
 
-        # Road width slider
-        road_width_label = ttk.Label(self, text="Road Width:")
-        road_width_label.grid(row=7, column=2, padx=5, pady=5, sticky="e")
-        road_width_slider = ttk.Scale(self, from_=1, to=10, orient="horizontal", variable=self.road_width_var)
-        road_width_slider.grid(row=7, column=3, padx=5, pady=5)
-
-        # Dirt road density slider
-        dirt_road_density_label = ttk.Label(self, text="Dirt Road Density:")
-        dirt_road_density_label.grid(row=8, column=2, padx=5, pady=5, sticky="e")
-        dirt_road_density_slider = ttk.Scale(self, from_=0, to=1, orient="horizontal", variable=self.dirt_road_density_var)
-        dirt_road_density_slider.grid(row=8, column=3, padx=5, pady=5)
-
-        # Primary road density slider
-        primary_road_density_label = ttk.Label(self, text="Primary Road Density:")
-        primary_road_density_label.grid(row=9, column=2, padx=5, pady=5, sticky="e")
-        primary_road_density_slider = ttk.Scale(self, from_=0, to=1, orient="horizontal", variable=self.primary_road_density_var)
-        primary_road_density_slider.grid(row=9, column=3, padx=5, pady=5)
-
-        # Secondary road density slider
-        secondary_road_density_label = ttk.Label(self, text="Secondary Road Density:")
-        secondary_road_density_label.grid(row=10, column=2, padx=5, pady=5, sticky="e")
-        secondary_road_density_slider = ttk.Scale(self, from_=0, to=1, orient="horizontal", variable=self.secondary_road_density_var)
-        secondary_road_density_slider.grid(row=10, column=3, padx=5, pady=5)
-
         # Highway spacing slider
         highway_spacing_label = ttk.Label(self, text="Highway Spacing:")
         highway_spacing_label.grid(row=4, column=2, padx=5, pady=5, sticky="e")
@@ -167,10 +135,6 @@ class TerrainGeneratorApp(tk.Tk):
         medium_grass_threshold = self.medium_grass_threshold_var.get()
         road_density = self.road_density_var.get()
         highway_spacing = self.highway_spacing_var.get()
-        road_width = self.road_width_var.get()
-        dirt_road_density = self.dirt_road_density_var.get()
-        primary_road_density = self.primary_road_density_var.get()
-        secondary_road_density = self.secondary_road_density_var.get()
 
         # Get the seed value from the entry field
         seed_value = self.seed_entry.get()
@@ -184,10 +148,10 @@ class TerrainGeneratorApp(tk.Tk):
 
         # Generate terrain map with the provided or random seed
         terrain_map, vegetation_map = generate_terrain_and_vegetation(IMAGE_SIZE[0], IMAGE_SIZE[1], scale, octaves, persistence, lacunarity,
-                                                                        water_threshold, dark_grass_threshold, medium_grass_threshold, seed=seed_value)
-        # Generate roads with new parameters
-        terrain_map_with_roads = generate_roads(terrain_map, road_density, highway_spacing,
-                                               road_width, dirt_road_density, primary_road_density, secondary_road_density)
+                                                                    water_threshold, dark_grass_threshold, medium_grass_threshold, seed=seed_value)
+
+        # Generate roads
+        terrain_map_with_roads = generate_roads(terrain_map, road_density, highway_spacing)
 
         # Apply road mask to vegetation map
         vegetation_map = apply_road_mask(terrain_map_with_roads, vegetation_map)
@@ -315,62 +279,68 @@ def generate_terrain_and_vegetation(width, height, scale, octaves, persistence, 
 
     return terrain_map, vegetation_map
 
-def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
-                   dirt_road_density=0.2, primary_road_density=0.2, secondary_road_density=0.2):
+def generate_roads(terrain_map, density=0.2, highway_spacing=50, driveway_density=0.5, max_driveway_length=20):
     draw = ImageDraw.Draw(terrain_map)
     width, height = terrain_map.size
 
     # Data structure to store road coordinates
     road_coordinates = set()
 
+    # Data structure to store driveway coordinates
+    driveway_coordinates = set()
+
     # Generate dirt roads branching off from secondary roads
     for i in range(0, width, int(highway_spacing)):
         for j in range(0, height, int(highway_spacing)):
-            if random.random() < dirt_road_density:
+            if random.random() < density:
                 start_x, start_y = i, j
                 end_x = random.randint(0, width)
                 end_y = random.randint(0, height)
-                
+
                 # Check if the proposed road segment intersects with existing roads
                 if ((start_x, start_y, end_x, start_y) in road_coordinates) or \
-                    ((end_x, start_y, end_x, end_y) in road_coordinates) or \
-                    ((start_x, start_y, start_x, end_y) in road_coordinates) or \
-                    ((start_x, end_y, end_x, end_y) in road_coordinates):
+                        ((end_x, start_y, end_x, end_y) in road_coordinates) or \
+                        ((start_x, start_y, start_x, end_y) in road_coordinates) or \
+                        ((start_x, end_y, end_x, end_y) in road_coordinates):
                     continue  # Skip this road segment if it intersects
-                    
+
                 # Add the road coordinates to the data structure
                 road_coordinates.add((start_x, start_y, start_x, end_y))
                 road_coordinates.add((start_x, end_y, end_x, end_y))
-                
-                # Draw the road segment
-                draw.line([(start_x, start_y), (start_x, end_y)], fill=(120, 70, 20), width=road_width)
-                draw.line([(start_x, end_y), (end_x, end_y)], fill=(120, 70, 20), width=road_width)
 
-    # Generate secondary roads branching off from primary roads
-    for i in range(0, width, int(highway_spacing)):
-        for j in range(0, height, int(highway_spacing)):
-            if random.random() < secondary_road_density:
-                start_x, start_y = i, j
-                end_x = random.randint(0, width)
-                end_y = random.randint(0, height)
-                
-                # Check if the proposed road segment intersects with existing roads
-                if ((start_x, start_y, end_x, start_y) in road_coordinates) or \
-                    ((end_x, start_y, end_x, end_y) in road_coordinates):
-                    continue  # Skip this road segment if it intersects
-                    
-                # Add the road coordinates to the data structure
-                road_coordinates.add((start_x, start_y, start_x, end_y))
-                road_coordinates.add((start_x, end_y, end_x, end_y))
-                
                 # Draw the road segment
-                draw.line([(start_x, start_y), (start_x, end_y)], fill=(165, 160, 140), width=road_width)
-                draw.line([(start_x, end_y), (end_x, end_y)], fill=(165, 160, 140), width=road_width)
+                draw.line([(start_x, start_y), (start_x, end_y)], fill=(120, 70, 20), width=3)
+                draw.line([(start_x, end_y), (end_x, end_y)], fill=(120, 70, 20), width=3)
 
+                # Generate driveways branching off from secondary roads
+                for _ in range(int(density * driveway_density * 10)):  # Increase the multiplier for higher density
+                    driveway_length = random.randint(1, max_driveway_length)
+                    driveway_start_x = random.randint(start_x, end_x)
+                    driveway_start_y = random.randint(start_y, end_y)
+                    driveway_end_x = driveway_start_x + random.choice([-1, 1]) * driveway_length
+                    driveway_end_y = driveway_start_y + random.choice([-1, 1]) * driveway_length
+
+                    # Check if the proposed driveway intersects with existing roads or driveways
+                    if ((driveway_start_x, driveway_start_y, driveway_end_x, driveway_start_y) in road_coordinates) or \
+                            ((driveway_end_x, driveway_start_y, driveway_end_x, driveway_end_y) in road_coordinates) or \
+                            ((driveway_start_x, driveway_start_y, driveway_start_x, driveway_end_y) in road_coordinates) or \
+                            ((driveway_start_x, driveway_end_y, driveway_end_x, driveway_end_y) in road_coordinates) or \
+                            ((driveway_start_x, driveway_start_y, driveway_end_x, driveway_start_y) in driveway_coordinates) or \
+                            ((driveway_end_x, driveway_start_y, driveway_end_x, driveway_end_y) in driveway_coordinates) or \
+                            ((driveway_start_x, driveway_start_y, driveway_start_x, driveway_end_y) in driveway_coordinates) or \
+                            ((driveway_start_x, driveway_end_y, driveway_end_x, driveway_end_y) in driveway_coordinates):
+                        continue  # Skip this driveway segment if it intersects
+
+                    # Add the driveway coordinates to the data structure
+                    driveway_coordinates.add((driveway_start_x, driveway_start_y, driveway_end_x, driveway_end_y))
+
+                    # Draw the driveway segment
+                    draw.line([(driveway_start_x, driveway_start_y), (driveway_end_x, driveway_end_y)],
+                              fill=(150, 150, 150), width=2)
     # Generate primary roads branching off from highways
     for i in range(0, width, int(highway_spacing)):
         for j in range(0, height, int(highway_spacing)):
-            if random.random() < primary_road_density:
+            if random.random() < density:
                 start_x, start_y = i, j
                 end_x = random.randint(0, width)
                 end_y = random.randint(0, height)
@@ -385,8 +355,8 @@ def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
                 road_coordinates.add((start_x, end_y, end_x, end_y))
                 
                 # Draw the road segment
-                draw.line([(start_x, start_y), (start_x, end_y)], fill=(120, 120, 120), width=road_width)
-                draw.line([(start_x, end_y), (end_x, end_y)], fill=(120, 120, 120), width=road_width)
+                draw.line([(start_x, start_y), (start_x, end_y)], fill=(120, 120, 120), width=6)
+                draw.line([(start_x, end_y), (end_x, end_y)], fill=(120, 120, 120), width=6)
 
     # Generate highways
     for i in range(0, width, int(highway_spacing)):
@@ -406,11 +376,11 @@ def generate_roads(terrain_map, density=0.2, highway_spacing=50, road_width=6,
                 road_coordinates.add((end_x, start_y, end_x, end_y))
                 
                 # Draw the road segment
-                draw.line([(start_x, start_y), (end_x, start_y)], fill=(100, 100, 100), width=road_width)
-                draw.line([(end_x, start_y), (end_x, end_y)], fill=(100, 100, 100), width=road_width)
+                draw.line([(start_x, start_y), (end_x, start_y)], fill=(100, 100, 100), width=7)
+                draw.line([(end_x, start_y), (end_x, end_y)], fill=(100, 100, 100), width=7)
+
 
     return terrain_map
-
 
 def apply_road_mask(terrain_map_with_roads, vegetation_map):
     # Convert terrain map with roads to numpy array for efficient pixel access
